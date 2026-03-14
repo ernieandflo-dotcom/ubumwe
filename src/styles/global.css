@@ -1,0 +1,367 @@
+/* ============================================================
+   UBUMWE — Global Styles
+   Design tokens, resets, typography, shared utilities.
+   Component-specific styles live in their own files or
+   as CSS Modules when the project scales to warrant it.
+   ============================================================ */
+
+/* ── DESIGN TOKENS ─────────────────────────────────────────── */
+:root {
+  /* Brand colours — Burundian flag palette, elevated */
+  --green:        #1B4332;
+  --green-mid:    #2D6A4F;
+  --green-light:  #40916C;
+  --red:          #9B1D20;
+  --red-warm:     #C0392B;
+  --gold:         #D4AF37;
+  --gold-light:   #F0D060;
+
+  /* Surface colours */
+  --cream:        #FAF6EF;
+  --cream-dark:   #F0E8D8;
+  --warm-white:   #FFFDF7;
+
+  /* Text colours */
+  --text-dark:    #1A1008;
+  --text-mid:     #4A3728;
+  --text-soft:    #7A6050;
+
+  /* Shared decorative */
+  --border:       rgba(212, 175, 55, 0.25);
+  --shadow-warm:  0 8px 40px rgba(155, 29, 32, 0.12);
+  --shadow-deep:  0 20px 80px rgba(27, 67, 50, 0.18);
+
+  /* Layout */
+  --max-width:    1280px;
+  --header-h:     68px;
+  --radius-sm:    2px;
+  --radius-md:    3px;
+  --radius-pill:  24px;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-accent:  'Cormorant Garamond', Georgia, serif;
+}
+
+/* ── RESET ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video {
+  max-width: 100%;
+  display: block;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+/* ── SCROLLBAR ──────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--green); }
+
+/* ── SHARED LAYOUT UTILITIES ────────────────────────────────── */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.page-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 60px 32px 80px;
+}
+
+/* ── SHARED BUTTON STYLES ───────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--green);
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  padding: 14px 32px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  padding: 14px 32px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Back button — mobile-only, shared across pages */
+.btn-back {
+  display: none; /* shown via media query in responsive section */
+  align-items: center;
+  gap: 8px;
+  background: var(--cream-dark);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 18px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.btn-back:hover {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+
+/* ── SECTION HEADER ─────────────────────────────────────────── */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red-warm);
+  margin-bottom: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: var(--red-warm);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.15;
+}
+.section-title em {
+  color: var(--green);
+  font-style: italic;
+}
+
+/* ── FORM ELEMENTS ──────────────────────────────────────────── */
+.form-group { margin-bottom: 20px; }
+
+.form-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--cream-dark);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  background: var(--warm-white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  -webkit-appearance: none;
+}
+.form-input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.08);
+}
+.form-textarea { resize: vertical; min-height: 120px; }
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234A3728' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+/* ── CARD BASE ──────────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-warm);
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-deep);
+}
+.card-hover-gold:hover { border-color: var(--gold); }
+
+/* ── TOAST ──────────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2000;
+  background: var(--green);
+  color: #fff;
+  border-left: 4px solid var(--gold);
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  box-shadow: var(--shadow-deep);
+  max-width: 320px;
+  animation: slideUpFade 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+/* ── MODAL OVERLAY ──────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+.modal-box {
+  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 32px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-deep);
+  animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── KEYFRAMES ──────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
+  70%  { box-shadow: 0 0 0 14px rgba(212, 175, 55, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── ROLE-RESTRICTED OVERLAY ────────────────────────────────── */
+.post-lock-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(250, 246, 239, 0.9);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 2;
+  border-radius: inherit;
+}
+.post-lock-overlay span { font-size: 1.8rem; }
+.post-lock-overlay p {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── RESPONSIVE BREAKPOINTS ─────────────────────────────────── */
+/* Show back button only on mobile/tablet (no nav visible) */
+@media (max-width: 768px) {
+  .btn-back {
+    display: inline-flex;
+  }
+  .container,
+  .page-content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .page-content {
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+  .toast {
+    bottom: 80px; /* above mobile nav bar if we add one later */
+    right: 16px;
+    left: 16px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-primary,
+  .btn-outline {
+    padding: 12px 24px;
+    font-size: 0.85rem;
+  }
+}
